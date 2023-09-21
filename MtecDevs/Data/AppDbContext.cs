@@ -1,12 +1,21 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using MtecDevs.Models;
 
-namespace MtecDevs.Data
+namespace MtecDevs.Data;
+
+public class AppDbContext : IdentityDbContext
 {
-    public class AppDbContext
+    public AppDbContext(DbContextOptions opcoes) : base(opcoes)
     {
-        
     }
+
+    public DbSet<Usuario> Usuarios { get; set; }
+    public DbSet<TipoDev> TipoDevs { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+        base.OnModelCreating(builder);
+    }
+    
 }

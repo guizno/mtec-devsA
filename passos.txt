@@ -21,3 +21,8 @@ Estar na pasta do repositório
 Usuários - Devs/Admin/Prof
     Dados básicos: Nome, Data, Nascimento, Foto, TipoDev
 TipoDev - Front/Back/Full/UX-UI/Design
+
+/* Criação da classe de Contexto na pasta Data */
+AppDbContext
+  
+/* Criar a string de conexão */
