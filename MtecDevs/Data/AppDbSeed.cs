@@ -2,6 +2,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MtecDevs.Models;
 namespace MtecDevs.Data;
+
+public class NewBaseType
+{
+}
+
 public class AppDbSeed
 {
     public AppDbSeed(ModelBuilder builder)
@@ -58,16 +63,40 @@ public class AppDbSeed
                 Id = Guid.NewGuid().ToString(),
                 UserName = "ArthurBuzacarini",
                 NormalizedUserName = "ARTHURBUZACARINI",
-                Email = "arthur.buzacarini@gmail.com", 
-                NormalizedEmail = "ARTHUR.BUZACARINI@GMAIL.COM",
+                Email = "guizinho.zaza14@gmail.com", 
+                NormalizedEmail = "GUIZINHO.ZAZA14@GMAIL.COM",
                 EmailConfirmed = true,
                 LockoutEnabled = true
             }
         };
+        //Criptografar a senha do IdentityUser
+        foreach (var user in users)
+        {
+            PasswordHasher<IdentityUser> password = new();
+            user.PasswordHash = password.HashPassword(user, "@Etec123");
+        } 
         builder.Entity<IdentityUser>().HasData(users);
-        // Criptografar a senha do IdentityUser
-        #endregion
-        
 
+        //Criar o usuário
+        List<Usuario> usuarios = new(){
+            new Usuario() {
+                UserId = users[0].Id,
+                Nome = "Arthur Buzacarini",
+                DataNascimento = DateTime.Parse("21/09/2006"),
+                Foto = "/img/usuarios/arthur.png",
+                TipoDevId = 2
+            }
+        };
+        builder.Entity<Usuario>().HasData(usuarios);
+
+        //Definir o perfil de cada usuário criado
+        List<IdentityUserRole<string>> userRoles = new() {
+            new IdentityUserRole<string>() {
+                UserId = users[0].Id,
+                RoleId = perfis[0].Id
+            }
+        };
+        builder.Entity<IdentityRole<string>>().HasData(userRoles);
+        #endregion
     }
 }
