@@ -96,7 +96,7 @@ public class AppDbSeed
                 RoleId = perfis[0].Id
             }
         };
-        builder.Entity<IdentityRole<string>>().HasData(userRoles);
+        builder.Entity<IdentityUserRole<string>>().HasData(userRoles);
         #endregion
     }
 }
