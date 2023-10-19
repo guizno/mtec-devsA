@@ -1,9 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 
-
 namespace MtecDevs.Controllers;
 
-[Route("[controller]")]
 public class AccountController : Controller
 {
     private readonly ILogger<AccountController> _logger;
